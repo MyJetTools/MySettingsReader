@@ -3,13 +3,15 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Version>1.1.1</Version>
+        <ProjectId>MyJetSettingsReader</ProjectId>
     </PropertyGroup>
+
 
 
     <ItemGroup>
         <PackageReference Include="DotNetCoreDecorators" Version="1.0.20" />
         <PackageReference Include="Flurl.Http" Version="3.0.1" />
-        <PackageReference Include="MyYamlParser" Version="1.0.1" />
+        <PackageReference Include="MyJetYamlParser" Version="1.1.0" />
     </ItemGroup>
 
 </Project>
