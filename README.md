@@ -1,4 +1,4 @@
-# MyJetSettingsReader
+# MySettingsReader
 
-![Nuget version](https://img.shields.io/nuget/v/MyJetSettingsReader?label=MyJetSettingsReader&style=social)
+![Nuget version](https://img.shields.io/nuget/v/MySettingsReader?label=MySettingsReader&style=social)
 
