@@ -9,9 +9,9 @@
 
 
     <ItemGroup>
-        <PackageReference Include="DotNetCoreDecorators" Version="1.0.20" />
-        <PackageReference Include="Flurl.Http" Version="3.0.1" />
-        <PackageReference Include="MyJetYamlParser" Version="1.1.0" />
+        <PackageReference Include="DotNetCoreDecorators" Version="1.0.21" />
+        <PackageReference Include="Flurl.Http" Version="3.2.0" />
+        <PackageReference Include="MyJetYamlParser" Version="1.1.1" />
     </ItemGroup>
 
 </Project>
