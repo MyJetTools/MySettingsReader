@@ -9,6 +9,8 @@ namespace MySettingsReader
 {
     public static class SettingsReader
     {
+        public static bool DisableTraceConsoleLog = false;
+        
         private const string SettingsUrlEnvVariable = "SETTINGS_URL";
 
         private static byte[] ReadingFromEnvVariable()
@@ -54,7 +56,8 @@ namespace MySettingsReader
 
         public static T GetSettings<T>(string homeFileName) where T : class, new()
         {
-
+            Console.WriteLine("Read settings yaml ...");
+            
             var yaml = ReadingFromEnvVariable() ?? ReadFromFileInHome(homeFileName);
 
             if (yaml == null)
@@ -65,16 +68,31 @@ namespace MySettingsReader
 
             var notUsed = new List<string>();
 
-            var result = MyYamlDeserializer.Deserialize<T>(yaml, notUsed);
-
-            if (notUsed.Count > 0)
+            try
             {
-                Console.WriteLine();
-                Console.WriteLine();
-                throw new Exception("The line is not initialized: " + notUsed[0]);
-            }
+                var result = MyYamlDeserializer.Deserialize<T>(yaml, notUsed);
 
-            return result;
+                if (notUsed.Count > 0)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    throw new Exception("The line is not initialized: " + notUsed[0]);
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Cannot parse settings yaml: {ex}");
+                if (!DisableTraceConsoleLog)
+                {
+                    Console.WriteLine("Yaml:");
+                    Console.WriteLine(yaml);
+                    Console.WriteLine();
+                }
+
+                throw new Exception("Cannot parse settings yaml", ex);
+            }
         }
 
 
