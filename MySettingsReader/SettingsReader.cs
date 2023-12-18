@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using DotNetCoreDecorators;
-using Flurl.Http;
 using MyYamlParser;
 
 namespace MySettingsReader
@@ -13,7 +13,7 @@ namespace MySettingsReader
         
         private const string SettingsUrlEnvVariable = "SETTINGS_URL";
 
-        private static byte[] ReadingFromEnvVariable()
+        public static byte[] ReadingFromEnvVariable()
         {
 
             var settingsUrl = Environment.GetEnvironmentVariable(SettingsUrlEnvVariable);
@@ -26,7 +26,8 @@ namespace MySettingsReader
 
             try
             {
-                return settingsUrl.GetBytesAsync().Result;
+                using var client = new HttpClient();
+                return client.GetByteArrayAsync(settingsUrl).GetAwaiter().GetResult();
             }
             catch (Exception e)
             {
